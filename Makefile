@@ -114,25 +114,25 @@ test-integration:
 	@echo "== Integration testing sd-server =="
 	@pytest ./scripts/tests/integration_tests.py ./sd-server/tests/ -v
 
-ICON := "sd-qt/media/logo/logo.png"
+ICON := "sd-qt/media/logo/logo.ico"
 
-sd-qt/media/logo/logo.png:
+sd-qt/media/logo/logo.ico:
 	mkdir -p build/MyIcon.iconset
-	sips -z 16 16     $(ICON) --out build/MyIcon.iconset/icon_16x16.png
-	sips -z 32 32     $(ICON) --out build/MyIcon.iconset/icon_16x16@2x.png
-	sips -z 32 32     $(ICON) --out build/MyIcon.iconset/icon_32x32.png
-	sips -z 64 64     $(ICON) --out build/MyIcon.iconset/icon_32x32@2x.png
-	sips -z 128 128   $(ICON) --out build/MyIcon.iconset/icon_128x128.png
-	sips -z 256 256   $(ICON) --out build/MyIcon.iconset/icon_128x128@2x.png
-	sips -z 256 256   $(ICON) --out build/MyIcon.iconset/icon_256x256.png
-	sips -z 512 512   $(ICON) --out build/MyIcon.iconset/icon_256x256@2x.png
-	sips -z 512 512   $(ICON) --out build/MyIcon.iconset/icon_512x512.png
-	cp				  $(ICON)       build/MyIcon.iconset/icon_512x512@2x.png
+	sips -z 16 16     $(ICON) --out build/MyIcon.iconset/icon_16x16.ico
+	sips -z 32 32     $(ICON) --out build/MyIcon.iconset/icon_16x16@2x.ico
+	sips -z 32 32     $(ICON) --out build/MyIcon.iconset/icon_32x32.ico
+	sips -z 64 64     $(ICON) --out build/MyIcon.iconset/icon_32x32@2x.ico
+	sips -z 128 128   $(ICON) --out build/MyIcon.iconset/icon_128x128.ico
+	sips -z 256 256   $(ICON) --out build/MyIcon.iconset/icon_128x128@2x.ico
+	sips -z 256 256   $(ICON) --out build/MyIcon.iconset/icon_256x256.ico
+	sips -z 512 512   $(ICON) --out build/MyIcon.iconset/icon_256x256@2x.ico
+	sips -z 512 512   $(ICON) --out build/MyIcon.iconset/icon_512x512.ico
+	cp				  $(ICON)       build/MyIcon.iconset/icon_512x512@2x.ico
 	iconutil -c icns build/MyIcon.iconset
 	rm -R build/MyIcon.iconset
 	mv build/MyIcon.icns sd-qt/media/logo/logo.icns
 
-dist/Sundial.app: sd-qt/media/logo/logo.png
+dist/Sundial.app: sd-qt/media/logo/logo.ico
 	pyinstaller --clean --noconfirm sd.spec
 
 dist/Sundial.dmg: dist/Sundial.app
@@ -164,6 +164,7 @@ package:
 	rm -f dist/Sundial/libfreetype.so.6
 # Remove unnecessary files
 	rm -rf dist/Sundial/pytz
+
 # Builds zips and setups
 	bash scripts/package/package-all.sh
 
